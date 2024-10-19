@@ -9,13 +9,19 @@ class Noteprovider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void AddDelete(int index) {
-    list.remove(index);
+  void update(Model model) {
+    int indexOf = list.indexOf(
+      list.firstWhere((model2) => model2.id == model.id),
+    );
+    list[indexOf] = model;
     notifyListeners();
   }
 
-  void UpdateData(Model model) {
-    list.add(model);
+  void delete(Model model) {
+    int indexOf = list.indexOf(
+      list.firstWhere((model2) => model2.id == model.id),
+    );
+    list.removeAt(indexOf);
     notifyListeners();
   }
 }

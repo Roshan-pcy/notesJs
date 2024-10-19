@@ -51,42 +51,48 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
           Model model = Provider.of<Noteprovider>(context).list[index];
           return Padding(
             padding: EdgeInsets.all(10.w),
-            child: Container(
-              padding: EdgeInsets.all(4.w),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    model.title!,
-                    style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Expanded(
-                    child: Text(
-                      maxLines: 7,
+            child: GestureDetector(
+              onTap: () {},
+              onLongPress: () {
+                noteprovider.delete(model);
+              },
+              child: Container(
+                padding: EdgeInsets.all(4.w),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      model.content!,
+                      model.title!,
                       style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                          color: const Color.fromARGB(255, 77, 76, 76)),
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black),
                     ),
-                  )
-                ],
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Expanded(
+                      child: Text(
+                        maxLines: 7,
+                        overflow: TextOverflow.ellipsis,
+                        model.content!,
+                        style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                            color: const Color.fromARGB(255, 77, 76, 76)),
+                      ),
+                    )
+                  ],
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black, width: 1.w),
+                ),
+                height: 40.w,
+                width: 50.w,
               ),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 1.w),
-              ),
-              height: 40.w,
-              width: 50.w,
             ),
           );
         },
