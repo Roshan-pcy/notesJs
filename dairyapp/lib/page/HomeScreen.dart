@@ -31,7 +31,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                 context,
                 CupertinoPageRoute(
                   fullscreenDialog: true,
-                  builder: (context) => AddPage(),
+                  builder: (context) => AddPage(isupdate: false),
                 ));
           },
         ),
@@ -52,7 +52,17 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
           return Padding(
             padding: EdgeInsets.all(10.w),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      fullscreenDialog: true,
+                      builder: (context) => AddPage(
+                        isupdate: true,
+                        models: model,
+                      ),
+                    ));
+              },
               onLongPress: () {
                 noteprovider.delete(model);
               },

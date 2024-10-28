@@ -5,12 +5,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
-class AddPage extends StatelessWidget {
+class AddPage extends StatefulWidget {
+  final bool isupdate;
+  final Model? models;
+  AddPage({super.key, required this.isupdate, this.models});
+
+  @override
+  State<AddPage> createState() => _AddPageState();
+}
+
+class _AddPageState extends State<AddPage> {
   final TextEditingController titleControl = TextEditingController();
+
   final TextEditingController contentControl = TextEditingController();
 
   final FocusNode focusNode = FocusNode();
-  AddPage({super.key});
 
   void addnote(BuildContext context) {
     Model myModel = Model(
@@ -21,6 +30,23 @@ class AddPage extends StatelessWidget {
     Provider.of<Noteprovider>(context, listen: false).AddNote(myModel);
   }
 
+  void update(BuildContext context) {
+    widget.models!.title = titleControl.text;
+    widget.models!.content = contentControl.text;
+
+    Provider.of<Noteprovider>(context, listen: false).update(widget.models!);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    if (widget.isupdate) {
+      titleControl.text = widget.models!.title!;
+      contentControl.text = widget.models!.content!;
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +54,12 @@ class AddPage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                addnote(context);
+                if (widget.isupdate) {
+                  update(context);
+                } else {
+                  addnote(context);
+                }
+
                 Navigator.pop(context);
               },
               icon: Icon(
@@ -43,6 +74,7 @@ class AddPage extends StatelessWidget {
         child: Column(
           children: [
             TextFormField(
+              autocorrect: widget.isupdate ? false : true,
               controller: titleControl,
               onFieldSubmitted: (value) {
                 if (value != '') {
