@@ -25,7 +25,7 @@ class Model {
     return {
       'id': id,
       'userid': userid,
-      ' title': title,
+      'title': title,
       'content': content,
       'dateadded': dateadded!.toIso8601String(),
     };

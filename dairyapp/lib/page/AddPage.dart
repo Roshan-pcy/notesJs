@@ -24,6 +24,7 @@ class _AddPageState extends State<AddPage> {
   void addnote(BuildContext context) {
     Model myModel = Model(
         id: Uuid().v1(),
+        userid: 'mynewid',
         title: titleControl.text,
         content: contentControl.text,
         dateadded: DateTime.now());
@@ -56,7 +57,10 @@ class _AddPageState extends State<AddPage> {
               onPressed: () {
                 if (widget.isupdate) {
                   update(context);
+                  print('updated called');
                 } else {
+                  print('Delete called');
+
                   addnote(context);
                 }
 
