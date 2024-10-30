@@ -84,7 +84,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  maxLines: 1,
+                                  maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   model.title!,
                                   style: TextStyle(
